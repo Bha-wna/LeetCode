@@ -1,17 +1,23 @@
 class Solution {
-    public int search(int[] nums, int target)
-    {
-     int l=0; int h= nums.length-1; int mid;
-        while(l<=h)
-        {  mid= l+(h-l)/2;
-             if (target==nums[mid])
-                 return mid;
-             if(target < nums[mid])
-                 h=mid-1;
-            else
-                l=mid+1;
-        }
-  
-       return -1;
+    public int search(int[] nums, int target) {
+      
+        int start =0;
+        int end = nums.length-1;
+        int idx =-1;
+        
+        while(start<=end)
+        { 
+          int mid = start + (end-start)/2;
+          if(nums[mid]== target)
+          { 
+              idx = mid;
+          }
+          if(target > nums[mid])
+            start = mid+1;
+          else
+            end = mid-1;
+         } 
+       
+        return idx; 
     }
 }
