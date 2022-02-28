@@ -1,20 +1,18 @@
 class Solution {
     public int subtractProductAndSum(int n) {
-       List<Integer> arr = new ArrayList<>();
-        while(n!=0)
+        int prod =1;
+        int sum=0;
+        int ret =0;
+        int r=0;
+        while(n !=0)
         {
-           arr.add(n%10)  ;
-           n = n/10; 
-            
+           r = n%10;
+           // prod =n%10; 
+            n= n/10;
+            sum = sum+r;
+            prod = prod*r;     
         }
-        int sum = 0, prod = 1, res=0;
-        for(Integer arr1 :arr)
-        {
-            sum = sum + arr1;
-            prod = prod*arr1;
-        }
-        res = prod - sum;
-        return res;
-        
+        ret = prod- sum;
+        return ret;
     }
 }
