@@ -1,26 +1,30 @@
 class Solution {
+   
     public boolean isHappy(int n) {
         int slow = n;
         int fast = n;
-        do{
-           slow = findsquare(slow);
-           fast = findsquare(findsquare(fast));
+        do
+        {
+           slow = findSquare(slow);
+           fast = findSquare(findSquare(fast)); 
             
-        }while(fast !=slow);
+        }while(slow !=fast) ; 
+        
         if(slow==1)
             return true;
         else
-            return false;
+         return false;
     }
-    public int findsquare(int number)
+    
+    public int findSquare(int n)
     {
-        int ans =0;
-        while(number !=0)
-        {
-            int rem = number%10;
-            ans += rem*rem;
-            number = number/10;
-        }
-        return ans;
+      int ans =0;
+      while(n!=0)
+      {
+        int rem = n%10;
+        ans= rem*rem + ans;
+        n = n/10;
+      }
+    return ans;
     }
 }
