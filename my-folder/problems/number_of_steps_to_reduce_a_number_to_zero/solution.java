@@ -1,18 +1,16 @@
 class Solution {
     public int numberOfSteps(int num) {
-       int steps =0; 
-        for(int i=1; num >0; i++)
+        Stack<Integer> s = new Stack<>();
+         s.push(num);
+        while(s.peek()!=0)
         {
-          if(num%2==0)  
-          {
-            num = num/2;  
-          }
-          else
-          {
-              num = num-1;
-          }
-          steps = i;
+        // int temp = s.peek();   
+         if((s.peek())% 2==0)
+             s.push(s.peek()/2);
+         else
+             s.push(s.peek()-1);
+            
         }
-        return steps;
+        return s.size()-1;
     }
 }
