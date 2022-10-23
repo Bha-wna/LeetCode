@@ -1,26 +1,21 @@
 class Solution {
     public int[] findErrorNums(int[] nums) {
-        int [] arr = new int [2];
-        int i=0;
-        while(i < nums.length)
+        Map<Integer,Integer> m = new HashMap<>();
+        int[] ans = new int[2];
+        for(int i=0; i<nums.length; i++)
         {
-            if(nums[i] != nums[nums[i]-1])
-            {
-                int temp = nums[nums[i]-1];
-                nums[nums[i]-1] =  nums[i];
-                nums[i] = temp;
-            }
-            else
-                i++;
+            if(!m.containsKey(nums[i]))
+                m.put(nums[i],1);
+           else
+               m.put(nums[i],m.get(nums[i])+1);
         }
-        for(int j=0;  j<nums.length; j++)
+        for(int i=1; i<=nums.length;i++)
         {
-            if(nums[j] != j+1)
-            {
-                arr[0] = nums[j];
-                arr[1] =  j+1;
-            }
+            if(!m.containsKey(i))
+                ans[1] =i;
+            else if(m.get(i)>1)
+                ans[0]=i;
         }
-        return arr;
+        return ans;
     }
 }
