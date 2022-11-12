@@ -11,7 +11,7 @@ class Solution {
           int mid = l + (r-l)/2;
           if(mid >0 && mid <len-1)
           {
-              if(nums[mid] >=nums[mid-1] && nums[mid] >=nums[mid+1])
+              if(nums[mid] >nums[mid-1] && nums[mid] >nums[mid+1])
                   return mid;
               else if(nums[mid] < nums[mid+1])
                    l= mid+1;
