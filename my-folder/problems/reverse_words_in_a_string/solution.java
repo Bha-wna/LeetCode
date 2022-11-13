@@ -7,12 +7,10 @@ class Solution {
         int len = s.length();
         String temp ="";
         for(int i=0; i<len; i++)
-        {
-           
+        { 
            if(s.charAt(i) !=' ')
            {   
                temp += s.charAt(i);
-              // System.out.println(temp);
                if(i == len-1)
                    st.push(temp);
            }
