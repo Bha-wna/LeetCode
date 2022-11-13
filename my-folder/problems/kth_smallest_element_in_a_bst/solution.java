@@ -15,24 +15,22 @@
  */
 class Solution {
     public int kthSmallest(TreeNode root, int k) {
-       int[] arr = new int[]{k};
-        TreeNode kthsmallest = helper(root, arr);
-        return kthsmallest.val;
+         List<Integer> in = new ArrayList<Integer>();
+       List<Integer> ans = inorder(root,in);
+       int res =0;
+       for(int i=0; i<k; i++)
+       {
+          res = ans.get(i);
+       }
+       return res;
     }
-    
-    public TreeNode helper(TreeNode root, int[]arr)
+    static List<Integer> inorder(TreeNode root, List<Integer> in)
     {
-        if(root==null)
-            return null;
-        
-        TreeNode left = helper(root.left, arr);
-        if(left != null)
-            return left;
-        arr[0]--;
-        if(arr[0]==0)
-            return root;
-        
-        return helper(root.right, arr);
-            
+       if(root==null)
+         return in; 
+       inorder(root.left,in);
+       in.add(root.val);
+       inorder(root.right,in);
+        return in;
     }
 }
