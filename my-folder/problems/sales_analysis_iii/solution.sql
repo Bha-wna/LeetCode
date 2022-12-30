@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+SELECT Product.product_id, product_name FROM Product WHERE Product.product_id NOT IN (SELECT Sales.product_id FROM Sales WHERE sale_date NOT BETWEEN '2019-01-01' and '2019-03-31' ) and product_id in(select product_id from sales) GROUP BY product_id;
