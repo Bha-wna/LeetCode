@@ -1,62 +1,40 @@
 class Solution {
     public int[] getOrder(int[][] tasks) {
-               int l = tasks.length;
-
-        Task[]  arr = new Task[l];
-
-        for(int i=0;i<l;i++)
+       int n = tasks.length;
+       PriorityQueue <int[]> pq = new PriorityQueue<>((a,b)-> (a[1] != b[1] ? (a[1]- b[1]) : (a[2]- b[2]))); 
+       
+        int[][] sortedTasks = new int[n][3];
+        int [] ans = new int[n];
+        
+        //array will store eqt, prt, index
+        for(int i=0; i<n; i++)
         {
-            arr[i] = new Task(i,tasks[i][0],tasks[i][1]);
+            sortedTasks[i][0] = tasks[i][0];
+            sortedTasks[i][1] = tasks[i][1];
+            sortedTasks[i][2] = i;
         }
-
-        Arrays.sort(arr,(a,b)->{
-            return Integer.compare(a.eqtime,b.eqtime);
-        });
-
-        PriorityQueue<Task> pq = new PriorityQueue<>((a,b)->{
-            if(a.protime==b.protime)
-            {
-                return Integer.compare(a.index,b.index);
-            }
-            return Integer.compare(a.protime,b.protime);
-        });
-
-        int ans[] = new int[l];
-        int ansi=0;
-        int taski=0;
-        int curTime=0;
-
-        while(ansi<l)
+       
+        Arrays.sort(sortedTasks, (a,b)-> Integer.compare(a[0], b[0]));
+        int currTime =0;
+        int taskIndex =0;
+        int ansIndex =0;
+        
+        while(taskIndex < n || !pq.isEmpty())
         {
-            while(taski<l && arr[taski].eqtime<=curTime)
+            if(pq.isEmpty() && currTime < sortedTasks[taskIndex][0])
+              currTime = sortedTasks[taskIndex][0];
+            
+            while(taskIndex < n && currTime >= sortedTasks[taskIndex][0] )
             {
-                pq.offer(arr[taski++]);
+                pq.offer(sortedTasks[taskIndex++]);
             }
-            if(pq.isEmpty())
-            {
-                curTime=arr[taski].eqtime;
-            }
-            else
-            {
-                curTime += pq.peek().protime;
-                ans[ansi++]=pq.poll().index;
-
-            }
+            
+            int processTime = pq.peek()[1];
+            currTime += processTime;
+            ans[ansIndex++] = pq.peek()[2];
+            pq.poll();
         }
-        return ans;
-
-    }
-    class Task
-    {
-        int index;
-        int eqtime;
-        int protime;
-
-        Task(int i,int eq,int pro)
-        {
-            this.index=i;
-            this.eqtime=eq;
-            this.protime=pro;
-        }
+        
+      return ans;  
     }
 }
