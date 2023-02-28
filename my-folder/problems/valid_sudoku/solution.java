@@ -1,4 +1,5 @@
-class Solution {
+
+    class Solution {
     public boolean isValidSudoku(char[][] board) {
        // int n = board.length;
       //  int m = board[0].length;
